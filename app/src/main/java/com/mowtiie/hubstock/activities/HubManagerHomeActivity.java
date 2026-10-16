@@ -26,7 +26,7 @@ public class HubManagerHomeActivity extends AppCompatActivity {
             startActivity(new Intent(this, ProfileActivity.class));
             return true;
         });
-        binding.cardApprovals.setOnClickListener(v -> soon());
+        binding.cardApprovals.setOnClickListener(v -> startActivity(new Intent(this, TransferOrderListActivity.class).putExtra(Data.EXTRA_FILTER, Data.FILTER_PENDING)));
         binding.cardWarehouses.setOnClickListener(v -> startActivity(new Intent(this, WarehouseListActivity.class)));
         binding.cardInventory.setOnClickListener(v -> startActivity(new Intent(this, InventoryActivity.class)));
         binding.cardDeliveries.setOnClickListener(v -> soon());

@@ -38,6 +38,15 @@
         <activity
             android:name=".activities.WarehouseListActivity"
             android:exported="false" />
+        <activity
+            android:name=".activities.TransferRequestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TransferOrderListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TransferDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -66,6 +66,22 @@ public class Data {
         return amount + " " + unit;
     }
 
+    public static final String EXTRA_FILTER = "filter";
+    public static final String EXTRA_ORDER = "order";
+    public static final String FILTER_PENDING = "pending";
+    public static final String FILTER_MINE = "mine";
+    public static final String FILTER_ALL = "all";
+
+    public static int productIndex(String sku) {
+        return PRODUCT_SKU.indexOf(sku);
+    }
+
+    public static String nextOrderId() {
+        int max = 0;
+        for (String id : ORDER_ID) max = Math.max(max, Integer.parseInt(id.substring(3)));
+        return String.format("TO-%03d", max + 1);
+    }
+
     public static int stockIndex(String warehouse, String sku) {
         for (int i = 0; i < STOCK_QTY.size(); i++) {
             if (STOCK_WAREHOUSE.get(i).equals(warehouse) && STOCK_PRODUCT.get(i).equals(sku)) return i;
@@ -244,7 +260,7 @@ public class Data {
         PRODUCT_CATEGORY.add(category);
     }
 
-    private static void addOrder(String id, String source, String dest, String sku, int qty, int approved,
+    public static void addOrder(String id, String source, String dest, String sku, int qty, int approved,
                                  int received, String status, String reason, String dispatch, String arrival) {
         ORDER_ID.add(id);
         ORDER_SOURCE.add(source);
