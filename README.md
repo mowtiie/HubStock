@@ -156,4 +156,4 @@ Good signature from "Mowtiie <mowtiie.dev@gmail.com>"
 
 ## License
 
-See [LICENSE](LICENSE).
+HubStock is released under the [MIT License](LICENSE).
