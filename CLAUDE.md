@@ -6,7 +6,7 @@ HubStock: a multi-branch warehouse logistics app where branch managers request s
 
 Core flow: **Request Stock → Approve → Schedule Delivery → Replenish (Accept Delivery)**
 
-This is a **simulation**. There is no backend, no payment gateway, no email/SMS, no real push notifications, no real tracking. Everything must look and behave correctly on screen during a demo. The only real storage is local SQLite for user accounts.
+This is a **simulation**. There is no backend, no payment gateway, no email/SMS, no real push notifications, no real tracking. Everything must look and behave correctly on screen during a demo. The only real storage is local SQLite: user accounts plus the app data (warehouses, products, stock, orders).
 
 Source of requirements: the spec the user provides (Multiple Branches brief). Read it fully before building. Where the spec is vague, pick the simplest simulated behavior and note it here.
 
@@ -18,7 +18,7 @@ Status: not started. Last verified build: not run yet.
 - **No structures.** No architecture patterns (MVVM, MVP, repositories, use cases, DI), no layers, no feature packages, no interfaces or abstract classes, no custom model/POJO classes. Exception: a single shared `GenericAdapter<T>` with a nested `Binder` interface.
 - One Activity per screen, one shared `Data.java` holding public static fields and arrays for all app state.
 - Represent records with parallel arrays and `ArrayList<String>` for lists that grow.
-- Hardcode seed data. Never fetch or sync anything. Everything except the SQLite table lives in memory and resets on restart.
+- Hardcode seed data. Never fetch or sync anything. `Data` lists are the in-memory working copy of the SQLite tables `warehouses`, `products`, `stock` and `orders`: `Data.load(context)` reads them, and every screen that changes them must call `Data.save(context)` afterwards. Data persists across restarts.
 - Duplicate code freely if it is faster than abstracting it.
 - No tests, no logging frameworks, no error handling beyond field validation.
 - Do not add libraries or touch `build.gradle` dependencies. Enabling `buildFeatures { viewBinding = true }` is allowed.
@@ -89,7 +89,7 @@ Navigation is `startActivity(new Intent(...))` with `putExtra`. After a flow fin
 - Login and logout are fake but validated. There is no sign up, password reset or profile edit. Accounts live in the SQLite `users` table (with `role` and `warehouse` columns), and the logged-in user is copied into `Data.USER_*` including `USER_ROLE` and `USER_WAREHOUSE`.
 - Three roles: Hub Manager, Inventory Clerk, Branch Manager. Login has no role switch: the stored account decides which home screen opens. Each role has its own root screen (`HubManagerHomeActivity`, `ClerkHomeActivity`, `BranchHomeActivity`), and Logout is only on Profile.
 - Accounts are created automatically on first launch, all with password `demo1234`: `hub@demo.com` (Hub Manager), `clerk@demo.com` (Inventory Clerk), `branch.a@demo.com` (Branch Manager of Branch A), `branch.b@demo.com` (Branch Manager of Branch B).
-- Seed demo data on first login of any role (warehouses, products, stock, a few transfer orders in different statuses) so no screen is empty in a demo. Keep it in one `Data.seedDemo()` helper that runs once.
+- Seed demo data on first login of any role (warehouses, products, stock, a few transfer orders in different statuses) so no screen is empty in a demo. Keep it in one `Data.seedDemo(context)` helper: it loads saved data once per process and seeds and saves only if the tables are empty.
 - Never put a role's screens behind a check in the UI only. Every role-specific Activity is reached from that role's home screen.
 - Light and dark mode are both supported through the generated theme. Do not hardcode colors.
 - Never use real Android notifications or channels. Simulated messages are Toast or Snackbar only.
