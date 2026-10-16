@@ -2,7 +2,6 @@ package com.mowtiie.hubstock.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,10 +29,6 @@ public class HubManagerHomeActivity extends AppCompatActivity {
         binding.cardWarehouses.setOnClickListener(v -> startActivity(new Intent(this, WarehouseListActivity.class)));
         binding.cardInventory.setOnClickListener(v -> startActivity(new Intent(this, InventoryActivity.class)));
         binding.cardDeliveries.setOnClickListener(v -> startActivity(new Intent(this, DeliveryListActivity.class)));
-        binding.cardReports.setOnClickListener(v -> soon());
-    }
-
-    private void soon() {
-        Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+        binding.cardReports.setOnClickListener(v -> startActivity(new Intent(this, ReportsActivity.class)));
     }
 }

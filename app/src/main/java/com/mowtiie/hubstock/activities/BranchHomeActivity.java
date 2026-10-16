@@ -2,7 +2,6 @@ package com.mowtiie.hubstock.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,10 +29,6 @@ public class BranchHomeActivity extends AppCompatActivity {
         binding.cardMyOrders.setOnClickListener(v -> startActivity(new Intent(this, TransferOrderListActivity.class).putExtra(Data.EXTRA_FILTER, Data.FILTER_MINE)));
         binding.cardIncoming.setOnClickListener(v -> startActivity(new Intent(this, TransferOrderListActivity.class).putExtra(Data.EXTRA_FILTER, Data.FILTER_INCOMING)));
         binding.cardMyStock.setOnClickListener(v -> startActivity(new Intent(this, InventoryActivity.class)));
-        binding.cardReports.setOnClickListener(v -> soon());
-    }
-
-    private void soon() {
-        Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+        binding.cardReports.setOnClickListener(v -> startActivity(new Intent(this, ReportsActivity.class)));
     }
 }
