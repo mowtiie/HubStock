@@ -86,35 +86,73 @@ There is no sign up. The stored account decides which home screen opens. Demo wa
 - Each order holds a single product.
 - Data is saved in local SQLite and persists across restarts.
 
-## Release build
-
-Release builds are minified and shrunk, and signed with a key read from `keystore.properties` in the project root. Copy `keystore.properties.example` to `keystore.properties` and fill in your values:
-
-```
-storeFile=hubstock.jks
-storePassword=your-store-password
-keyAlias=hubstock
-keyPassword=your-key-password
-```
-
-Then build with:
-
-```bash
-./gradlew assembleRelease
-```
-
-`keystore.properties`, `*.jks` and `*.keystore` are git-ignored and must never be committed.
-
 ## Verification
 
-Release APKs can be verified with
+APK releases on GitHub are signed using my key. They can
+be verified using
 [apksigner](https://developer.android.com/studio/command-line/apksigner.html#options-verify):
 
 ```
 apksigner verify --print-certs --verbose hubstock.apk
 ```
 
-Compare the certificate fingerprints in the output with the ones published for the release.
+The output should look like:
+
+```
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v3.2 scheme (APK Signature Scheme v3.2): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+```
+
+The certificate fingerprints should correspond to the ones listed below:
+
+```
+Owner: CN=Mowtiie
+Issuer: CN=Mowtiie
+Serial number: 8a256fdcdde50069
+Valid from: Wed Jun 10 22:57:23 PST 2026 until: Sun Oct 26 22:57:23 PST 2053
+Certificate fingerprints:
+         SHA1: 56:4E:2C:DB:E4:06:C9:EC:15:E6:BC:D9:0A:88:38:72:8B:FB:13:20
+         SHA256: 8B:67:51:F3:C3:31:85:63:5F:98:95:30:B6:C0:73:A1:39:7B:3D:41:2B:EF:AE:69:06:A2:EB:58:45:D2:DE:63
+```
+
+**Warning:** Only install HubStock APKs signed with the key above. Verifying the signature confirms you're running a genuine, unmodified build.
+
+### PGP Signing
+
+As an additional layer on top of the Android signature above, each release is also signed with my PGP key. While `apksigner` confirms the APK itself is intact, a PGP signature confirms that *I* am the one who published this specific file to GitHub — an independent check that doesn't rely on GitHub's account security alone.
+
+**Public key fingerprint:**
+```
+9EA2 8F46 7802 5092 7643 1B69 42B5 FA42 AA63 90E1
+```
+
+Download and import the key from my website, or directly from this repo:
+
+```
+curl -O https://mowtiie.cc/PGP_PUBLIC_KEY.asc
+gpg --import PGP_PUBLIC_KEY.asc
+```
+
+After importing, confirm the fingerprint printed by GPG matches the one listed above — that match is what actually establishes trust, not the import step itself. Fetching the key over HTTPS from a domain you already trust is arguably a stronger anchor than a keyserver, since keyservers accept uploads from anyone and don't vouch for identity.
+
+Each release includes a detached `.asc` signature alongside the APK. Verify a downloaded release with:
+
+```
+gpg --verify hubstock-X.X.apk.asc hubstock-X.X.apk
+```
+
+A valid signature looks like:
+
+```
+Good signature from "Mowtiie <mowtiie.dev@gmail.com>"
+```
+
+**Note:** PGP signing is a supplementary trust measure, not a substitute for the `apksigner` check above — verify both if you want the highest confidence that a release is genuine and unmodified.
 
 ## License
 
