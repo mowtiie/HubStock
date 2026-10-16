@@ -27,7 +27,7 @@ public class ClerkHomeActivity extends AppCompatActivity {
             return true;
         });
         binding.cardInventory.setOnClickListener(v -> startActivity(new Intent(this, InventoryActivity.class)));
-        binding.cardDeliveries.setOnClickListener(v -> soon());
+        binding.cardDeliveries.setOnClickListener(v -> startActivity(new Intent(this, DeliveryListActivity.class)));
         binding.cardReports.setOnClickListener(v -> soon());
     }
 

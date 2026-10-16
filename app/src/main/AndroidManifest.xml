@@ -47,6 +47,15 @@
         <activity
             android:name=".activities.TransferDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".activities.DeliveryListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ScheduleDeliveryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ReceiveDeliveryActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

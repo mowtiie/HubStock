@@ -71,6 +71,7 @@ public class Data {
     public static final String FILTER_PENDING = "pending";
     public static final String FILTER_MINE = "mine";
     public static final String FILTER_ALL = "all";
+    public static final String FILTER_INCOMING = "incoming";
 
     public static int productIndex(String sku) {
         return PRODUCT_SKU.indexOf(sku);

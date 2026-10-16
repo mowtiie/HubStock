@@ -30,6 +30,7 @@ public class TransferOrderListActivity extends AppCompatActivity {
         filter = getIntent().getStringExtra(Data.EXTRA_FILTER);
         if (Data.FILTER_PENDING.equals(filter)) binding.toolbar.setTitle("Pending approvals");
         else if (Data.FILTER_MINE.equals(filter)) binding.toolbar.setTitle("My orders");
+        else if (Data.FILTER_INCOMING.equals(filter)) binding.toolbar.setTitle("Incoming deliveries");
         else binding.toolbar.setTitle("All orders");
         binding.toolbar.setNavigationOnClickListener(v -> finish());
 
@@ -53,6 +54,8 @@ public class TransferOrderListActivity extends AppCompatActivity {
             boolean show;
             if (Data.FILTER_PENDING.equals(filter)) show = Data.ORDER_STATUS.get(i).equals(Data.STATUS_PENDING);
             else if (Data.FILTER_MINE.equals(filter)) show = Data.ORDER_DEST.get(i).equals(Data.USER_WAREHOUSE);
+            else if (Data.FILTER_INCOMING.equals(filter)) show = Data.ORDER_DEST.get(i).equals(Data.USER_WAREHOUSE)
+                    && Data.ORDER_STATUS.get(i).equals(Data.STATUS_IN_TRANSIT);
             else show = true;
             if (show) rows.add(i);
         }
