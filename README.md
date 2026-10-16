@@ -86,6 +86,19 @@ There is no sign up. The stored account decides which home screen opens. Demo wa
 - Each order holds a single product.
 - Data is saved in local SQLite and persists across restarts.
 
+## Screenshots
+
+<div align="center">
+	<div>
+         <img src="metadata/en-US/images/screenshots/screenshot1.jpg" width="30%" />
+         <img src="metadata/en-US/images/screenshots/screenshot2.jpg" width="30%" />
+         <img src="metadata/en-US/images/screenshots/screenshot3.jpg" width="30%" />
+         <img src="metadata/en-US/images/screenshots/screenshot4.jpg" width="30%" />
+         <img src="metadata/en-US/images/screenshots/screenshot5.jpg" width="30%" />
+         <img src="metadata/en-US/images/screenshots/screenshot6.jpg" width="30%" />
+	</div>
+</div>
+
 ## Verification
 
 APK releases on GitHub are signed using my key. They can
