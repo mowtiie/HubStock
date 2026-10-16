@@ -10,7 +10,7 @@ This is a **simulation**. There is no backend, no payment gateway, no email/SMS,
 
 Source of requirements: the spec the user provides (Multiple Branches brief). Read it fully before building. Where the spec is vague, pick the simplest simulated behavior and note it here.
 
-Status: all five build steps coded and the core flow runs on an emulator. Last verified build: assembleDebug passes. Emulator-checked: login, Hub and Branch homes, profile and logout, approve with validation, schedule with date pickers, dispatch (source stock deducted), accept with partial receipt (destination stock added), delivery list, incoming deliveries, reports (Partial tab, branch filtering), inventory, my stock with low-stock warning, new request form, dark mode. Not yet checked on a device: Clerk role, warehouse and product bottom sheets, reject, Completed and Pending report tabs, release build.
+Status: all five build steps coded and the core flow runs on an emulator. Last verified build: assembleDebug passes. Emulator-checked: login, Hub and Branch homes, profile and logout, approve with validation, schedule with date pickers, dispatch (source stock deducted), accept with partial receipt (destination stock added), delivery list, incoming deliveries, reports (Partial tab, branch filtering), inventory, my stock with low-stock warning, new request form, dark mode. Also checked: Clerk home and inventory edit sheet, Pending and Completed report tabs. Not yet checked on a device: reject, warehouse sheet, add product, release build.
 
 ## Prime directive: build the fastest way possible
 

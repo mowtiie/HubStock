@@ -52,14 +52,14 @@ public class ReportsActivity extends AppCompatActivity {
             int p = Data.productIndex(Data.ORDER_PRODUCT.get(o));
             String unit = Data.PRODUCT_UNIT.get(p);
             String status = Data.ORDER_STATUS.get(o);
-            String sub = Data.ORDER_SOURCE.get(o) + " → " + Data.ORDER_DEST.get(o) + "\n"
-                    + Data.qty(Data.ORDER_QTY.get(o), unit) + " requested";
+            String sub = Data.ORDER_SOURCE.get(o) + " → " + Data.ORDER_DEST.get(o) + "\n";
             if (status.equals(Data.STATUS_COMPLETED) || status.equals(Data.STATUS_PARTIAL)) {
+                int approved = Data.ORDER_APPROVED_QTY.get(o);
                 int received = Data.ORDER_RECEIVED_QTY.get(o);
-                sub += " · " + Data.qty(received, unit) + " received";
-                if (received < Data.ORDER_APPROVED_QTY.get(o)) {
-                    sub += "\nShortfall: " + Data.qty(Data.ORDER_APPROVED_QTY.get(o) - received, unit);
-                }
+                sub += Data.qty(approved, unit) + " approved · " + Data.qty(received, unit) + " received";
+                if (received < approved) sub += "\nShortfall: " + Data.qty(approved - received, unit);
+            } else {
+                sub += Data.qty(Data.ORDER_QTY.get(o), unit) + " requested";
             }
             b.tvTitle.setText(Data.ORDER_ID.get(o) + " · " + Data.PRODUCT_NAME.get(p));
             b.tvSubtitle.setText(sub);
