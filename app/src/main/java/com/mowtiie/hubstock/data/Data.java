@@ -66,6 +66,18 @@ public class Data {
         return amount + " " + unit;
     }
 
+    public static int stockIndex(String warehouse, String sku) {
+        for (int i = 0; i < STOCK_QTY.size(); i++) {
+            if (STOCK_WAREHOUSE.get(i).equals(warehouse) && STOCK_PRODUCT.get(i).equals(sku)) return i;
+        }
+        return -1;
+    }
+
+    public static int stockQty(String warehouse, String sku) {
+        int i = stockIndex(warehouse, sku);
+        return i < 0 ? 0 : STOCK_QTY.get(i);
+    }
+
     // Reads the four data tables into the lists above, replacing their contents.
     public static void load(Context context) {
         SQLiteDatabase db = new DbHelper(context).getReadableDatabase();

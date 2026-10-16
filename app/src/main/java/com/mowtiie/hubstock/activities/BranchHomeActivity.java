@@ -1,5 +1,6 @@
 package com.mowtiie.hubstock.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -22,13 +23,13 @@ public class BranchHomeActivity extends AppCompatActivity {
 
         binding.tvGreeting.setText("Hello, " + Data.USER_NAME + " · " + Data.USER_WAREHOUSE);
         binding.toolbar.setOnMenuItemClickListener(item -> {
-            soon();
+            startActivity(new Intent(this, ProfileActivity.class));
             return true;
         });
         binding.cardNewRequest.setOnClickListener(v -> soon());
         binding.cardMyOrders.setOnClickListener(v -> soon());
         binding.cardIncoming.setOnClickListener(v -> soon());
-        binding.cardMyStock.setOnClickListener(v -> soon());
+        binding.cardMyStock.setOnClickListener(v -> startActivity(new Intent(this, InventoryActivity.class)));
         binding.cardReports.setOnClickListener(v -> soon());
     }
 

@@ -29,6 +29,15 @@
         <activity
             android:name=".activities.BranchHomeActivity"
             android:exported="false" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.InventoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.WarehouseListActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

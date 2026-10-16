@@ -10,7 +10,7 @@ This is a **simulation**. There is no backend, no payment gateway, no email/SMS,
 
 Source of requirements: the spec the user provides (Multiple Branches brief). Read it fully before building. Where the spec is vague, pick the simplest simulated behavior and note it here.
 
-Status: not started. Last verified build: not run yet.
+Status: build steps 1 and 2 coded (login, homes, profile, inventory, warehouses). Last verified build: assembleDebug passes; not yet run on an emulator.
 
 ## Prime directive: build the fastest way possible
 
