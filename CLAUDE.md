@@ -102,7 +102,7 @@ Navigation is `startActivity(new Intent(...))` with `putExtra`. After a flow fin
 |---|---|---|---|
 | Create transfer request | own warehouse | no | no |
 | Approve / reject request | no | no | yes |
-| Manage products and stock | view own | yes | yes |
+| Manage products and stock | view own | yes (Central Hub only; view branches) | yes (Central Hub only; view branches) |
 | Schedule delivery, advance status | no | yes | yes |
 | Accept delivery (replenish) | own warehouse | no | no |
 | View reports | own branch | all | all |
@@ -110,7 +110,7 @@ Navigation is `startActivity(new Intent(...))` with `putExtra`. After a flow fin
 
 **2. Product records / inventory**
 - Product catalog is global: SKU, name, unit, category. Stock is per warehouse: parallel arrays `STOCK_WAREHOUSE`, `STOCK_PRODUCT`, `STOCK_QTY`.
-- Hub Manager and Clerk can add/edit products and adjust stock with a `BottomSheetDialog`. Branch Manager sees only their own warehouse's stock.
+- Hub Manager and Clerk can add/edit products and adjust stock with a `BottomSheetDialog`, but only for Central Hub: each warehouse owns its stock. They can view any warehouse read-only. Branch stock changes only through accepted deliveries. Branch Manager sees only their own warehouse's stock.
 - Low stock (qty below a hardcoded `LOW_STOCK_LEVEL`) shows a text warning in the row.
 
 **3. Warehouse information**

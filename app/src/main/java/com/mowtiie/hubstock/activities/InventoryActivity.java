@@ -22,7 +22,13 @@ public class InventoryActivity extends AppCompatActivity {
     private GenericAdapter<Integer> adapter;
     private final ArrayList<Integer> rows = new ArrayList<>(); // product indexes
     private String warehouse = Data.USER_WAREHOUSE;
-    private boolean canEdit;
+    private boolean isManager; // Hub Manager or Clerk: may view every warehouse
+
+    // Each warehouse owns its stock: only the hub's own stock is edited here. Branch stock
+    // changes through accepted deliveries.
+    private boolean canEdit() {
+        return isManager && warehouse.equals(Data.HUB);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +37,10 @@ public class InventoryActivity extends AppCompatActivity {
         binding = ActivityInventoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        canEdit = !Data.USER_ROLE.equals(Data.ROLE_BRANCH);
+        isManager = !Data.USER_ROLE.equals(Data.ROLE_BRANCH);
         binding.toolbar.setNavigationOnClickListener(v -> finish());
 
-        if (canEdit) {
+        if (isManager) {
             binding.ddWarehouse.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Data.WAREHOUSE_NAME));
             binding.ddWarehouse.setText(warehouse, false);
             binding.ddWarehouse.setOnItemClickListener((parent, view, position, id) -> {
@@ -59,14 +65,18 @@ public class InventoryActivity extends AppCompatActivity {
             b.tvTitle.setText(Data.PRODUCT_NAME.get(p));
             b.tvSubtitle.setText(sub);
             b.tvTrailing.setText(Data.qty(qty, Data.PRODUCT_UNIT.get(p)));
-            b.getRoot().setClickable(canEdit);
-            b.getRoot().setOnClickListener(canEdit ? v -> showSheet(p) : null);
+            b.getRoot().setClickable(canEdit());
+            b.getRoot().setOnClickListener(canEdit() ? v -> showSheet(p) : null);
         });
         binding.rvItems.setAdapter(adapter);
         refresh();
     }
 
     private void refresh() {
+        if (isManager) {
+            binding.toolbar.getMenu().findItem(R.id.action_add).setVisible(canEdit());
+            binding.tilWarehouse.setHelperText(canEdit() ? null : "View only. Branch stock changes through deliveries");
+        }
         rows.clear();
         for (int i = 0; i < Data.PRODUCT_SKU.size(); i++) rows.add(i);
         adapter.setItems(rows);
