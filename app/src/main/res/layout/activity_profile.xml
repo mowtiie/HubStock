@@ -96,11 +96,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogout"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:minHeight="48dp"
-        android:text="Log out" />
+        android:background="?attr/colorSurfaceContainerHigh"
+        android:padding="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Log out" />
+    </FrameLayout>
 </LinearLayout>
