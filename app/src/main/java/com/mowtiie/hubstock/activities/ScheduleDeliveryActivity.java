@@ -52,6 +52,7 @@ public class ScheduleDeliveryActivity extends AppCompatActivity {
     }
 
     private void pickDate(String title, long current, OnPicked callback) {
+        if (getSupportFragmentManager().findFragmentByTag(title) != null) return; // already open
         MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker().setTitleText(title);
         if (current >= 0) builder.setSelection(current);
         MaterialDatePicker<Long> picker = builder.build();
